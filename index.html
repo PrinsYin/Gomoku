@@ -8,12 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gomoku</title>
 </head>
-<body>
+<body onload="init()">
+    
     <div class="container">
-        <div class="board">
-            
-        </div>
+        <h1 id="aaa"></h1>
+        <button class="btn btn-info" onclick="playerf()">玩家先行</button>
+        <button class="btn btn-info" onclick="aif()">电脑先行</button>
+        <canvas width="605px" height="605px" id="canvas" class="board">           </canvas>
     </div>
+    <script src="js/evaluate.js"></script> 
+    <script src="js/init.js"></script>     
+        
     <script src="js/minmax.js"></script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 </body>
 </html>
