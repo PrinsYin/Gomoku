@@ -91,32 +91,46 @@ function expand(i,j)
 
 function put(i,j)
 {
-    document.getElementById("aaa").innerHTML=n;
-    console.log(n)
-    console.log("value:"+getvalue())
+    
+    // console.log(n)
+    
+    // console.log(nx,ny,n)
     if(board[i][j]!=0)
         return;
     list.push([i,j])
     // console.log(i,j)
     n++;
+    document.getElementById("aaa").innerHTML=n;
     drawchess(i,j);
     board[i][j]=n;
-    console.log(i,j)
+    // console.log(i,j)
     if(n%2==choose)
         board1[i][j]=1;
     else
+    {
         board1[i][j]=0;
+        console.log("value:"+getvalue())
+        // if(ongoing!=1)
+    console.log(lian5,huo4,chong4,huo3,mian3,huo2,mian2);
+    // if(ongoing!=1)
+    console.log(lian51,huo41,chong41,huo31,mian31,huo21,mian21)
+    // if(ongoing!=1)
+    }
     if(!allexpand)
         expand(i,j);
+        
     if(n%2!=choose)
     {
         ongoing=1;
         digui=0;
-        minmax(-99999999,9999999,0);
+        // console.log(nx,ny,n)
+        minmax(-9999999,9999999,0,i,j);
+        // console.log(nx,ny,n)
         put(nx,ny);
         ongoing=0;
     }
-    console.log(board1,board2,digui)
+    
+    console.log(board1,board2,digui,cutnum)
 }
 
 canvas.addEventListener('click', function(event)
@@ -147,7 +161,7 @@ canvas.addEventListener('click', function(event)
 
 function drawchess(i,j)
 {
-    
+    console.log("draw",i,j,n)
     ctx.beginPath();
     if(n%2==1)
     {
@@ -163,6 +177,13 @@ function drawchess(i,j)
     ctx.fill();
     ctx.arc(j*40-19,i*40-19,15,0,Math.PI*2,true);
     ctx.stroke();
+    if(n%2==choose)
+    {
+        canvasHistory.push(canvas.toDataURL());
+        cindex++;
+    }
+
+    console.log("canvasHistory.length"+canvasHistory.length)
     // ontext.arc(x,y,半径，开始角度，结束角度，是否逆时针旋转)
 }
 
@@ -191,7 +212,43 @@ function drawboard()
         //水平方向画15根，相距30px
         ctx.stroke();
     }
+
     
+    ctx.fillStyle="black";
+    ctx.strokeStyle="black";
+    ctx.beginPath();
+    ctx.arc(3*40-19,3*40-19,3,0,Math.PI*2,true);
+    ctx.fill();
+    ctx.arc(3*40-19,3*40-19,3,0,Math.PI*2,true);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(3*40-19,13*40-19,3,0,Math.PI*2,true);
+    ctx.fill();
+    ctx.arc(3*40-19,13*40-19,3,0,Math.PI*2,true);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(13*40-19,3*40-19,3,0,Math.PI*2,true);
+    ctx.fill();
+    ctx.arc(13*40-19,3*40-19,3,0,Math.PI*2,true);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(13*40-19,13*40-19,3,0,Math.PI*2,true);
+    ctx.fill();
+    ctx.arc(13*40-19,13*40-19,3,0,Math.PI*2,true);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(8*40-19,8*40-19,3,0,Math.PI*2,true);
+    ctx.fill();
+    ctx.arc(8*40-19,8*40-19,3,0,Math.PI*2,true);
+    ctx.stroke();
+    console.log("canvasHistory.length"+canvasHistory.length)
+
+    canvasHistory.push(canvas.toDataURL());
+    cindex++;
 
 }
 
@@ -205,9 +262,6 @@ function iniboard2(x,y)
 function init()
 {
     var ll="22221122222";
-    var temp,t1=0;
-    console.log(t1+=(temp=ll.match(/221122/g))?temp.length:0)
-    console.log(temp.length)
     drawboard();
     var xi=8,yi=8;
     iniboard2(xi,yi)
