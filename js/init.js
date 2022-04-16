@@ -50,6 +50,7 @@ var board2=[
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+var win=0;
 var canvas= document.getElementById('canvas')
 var ctx=document.getElementById("canvas").getContext("2d");
 var n=0;
@@ -100,6 +101,8 @@ function put(i,j)
     list.push([i,j])
     // console.log(i,j)
     n++;
+    win=0;
+    
     document.getElementById("aaa").innerHTML=n;
     drawchess(i,j);
     board[i][j]=n;
@@ -109,13 +112,20 @@ function put(i,j)
     else
     {
         board1[i][j]=0;
-        console.log("value:"+getvalue())
+        
         // if(ongoing!=1)
     console.log(lian5,huo4,chong4,huo3,mian3,huo2,mian2);
     // if(ongoing!=1)
     console.log(lian51,huo41,chong41,huo31,mian31,huo21,mian21)
     // if(ongoing!=1)
     }
+    console.log("value:"+getvalue())
+    if(win==1)
+        document.getElementById("intro").innerHTML="you won!";
+    else if(win==2)
+        document.getElementById("intro").innerHTML="AI won!loser!!!!!!";
+    if(win!=0)
+        return;
     if(!allexpand)
         expand(i,j);
         

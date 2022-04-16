@@ -8,7 +8,11 @@ function analine(l)
     // console.log("analine")
     var temp;    
     lian5 +=(( temp=l.match(/11111/g))?temp.length:0);
+    if(lian5)
+        win=2;
     lian51 +=(( temp=l.match(/00000/g))?temp.length:0);
+    if(lian51)
+        win=1;
     huo4+=(( temp=l.match(/211112/g))?temp.length:0);
     huo41+=(( temp= l.match(/200002/g))?temp.length:0);
 
