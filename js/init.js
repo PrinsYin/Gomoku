@@ -101,6 +101,7 @@ function put(i,j)
     n++;
     drawchess(i,j);
     board[i][j]=n;
+    console.log(i,j)
     if(n%2==choose)
         board1[i][j]=1;
     else
@@ -138,6 +139,8 @@ canvas.addEventListener('click', function(event)
     y/=2;
     x=parseInt(x);
     y=parseInt(y);
+    y++;
+    x++;
     // console.log(x,y)
     put(y,x);
 })
@@ -156,9 +159,9 @@ function drawchess(i,j)
         ctx.fillStyle="white";
         ctx.strokeStyle="black";
     }
-    ctx.arc(j*40+21,i*40+21,15,0,Math.PI*2,true);
+    ctx.arc(j*40-19,i*40-19,15,0,Math.PI*2,true);
     ctx.fill();
-    ctx.arc(j*40+21,i*40+21,15,0,Math.PI*2,true);
+    ctx.arc(j*40-19,i*40-19,15,0,Math.PI*2,true);
     ctx.stroke();
     // ontext.arc(x,y,半径，开始角度，结束角度，是否逆时针旋转)
 }
@@ -196,7 +199,7 @@ function iniboard2(x,y)
 {
     for(var i=1;i<=15;i++)
         for(var j=1;j<=15;j++)
-            board2[i][j]=parseInt((14-Math.abs(i-x)-Math.abs(j-y))/2);
+            board2[i][j]=parseInt((14-Math.abs(i-x)-Math.abs(j-y)));
 }
 
 function init()

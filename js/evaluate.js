@@ -129,7 +129,7 @@ function getscore()
         return [-9000,-9000];
     sum1+=huo3*400+mian3*50+huo2*30+mian2*10;
     sum2+=huo31*400+mian31*50+huo21*30+mian21*10;
-    sum1*=2;
+    sum1+=100;
     // if(ongoing!=1)
     return [sum1-sum2,sum1-sum2];
 }
@@ -163,6 +163,7 @@ function getvalue()
             else if(board1[i][j]==0)
                 sum2+=board2[i][j];
         }
+        // console.log(l)
         if(aisum>1||isum>1)
             analine(l);
         
@@ -181,6 +182,7 @@ function getvalue()
             else if(board1[j][i]==0)
                 isum++;
         }
+        // console.log(l)
         if(aisum>1||isum>1)
             analine(l);
     }
@@ -200,7 +202,7 @@ function getvalue()
                 
         }
         // if(ongoing!=1)
-        //         console.log(l)
+                // console.log(l)
         if(aisum>1||isum>1)
             analine(l);
     }
@@ -220,7 +222,7 @@ function getvalue()
                 
         }
         // if(ongoing!=1)
-        //         console.log(l)
+                // console.log(l)
         if(aisum>1||isum>1)
             analine(l);
     }
@@ -240,6 +242,7 @@ function getvalue()
             else if(board1[i+j-1][j]==0)
                 isum++;
         }
+        // console.log(l)
         if(aisum>1||isum>1)
             analine(l);
     }
@@ -251,12 +254,13 @@ function getvalue()
         isum=0;
         for(var j=1;j<=16-i;j++)
         {
-           l=l+board1[i+j-1][j];
-           if(board1[i+j-1][j]==1)
+           l=l+board1[j][i+j-1];
+           if(board1[j][i+j-1]==1)
                 aisum++;
-            else if(board1[i+j-1][j]==0)
+            else if(board1[j][i+j-1]==0)
                 isum++;
         }
+        // console.log(l)
         if(aisum>1||isum>1)
             analine(l);
     }
