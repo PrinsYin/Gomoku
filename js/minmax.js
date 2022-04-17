@@ -170,6 +170,16 @@ function minmax(a,b,d,i1,j1)
         else
             board1[i][j]=0;
         updateScore([i,j]);
+        evaluate(1);
+        if(kill==1)
+        {
+                    a1=b1=9999999999;
+                    nx=i;
+            ny=j;
+        }
+                else if(kill==0)
+                    a1=b1=-9999999999;
+                else
         list=minmax(a1,b1,d1,i,j);
         
         // console.log("list",list,a1,b1,xn,yn,nx,ny)

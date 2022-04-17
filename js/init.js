@@ -72,7 +72,7 @@ function put(i,j)
         ongoing=1;
         digui=0;
         // console.log(nx,ny,n)
-        minmax(-999999999,999999999,0,i,j);
+        minmax(-9999999999,9999999999,0,i,j);
         // console.log(nx,ny,n)
         put(nx,ny);
         console.log(COMScore,HUMScore,board1)
@@ -145,11 +145,7 @@ function drawchess(i,j)
     ctx.fill();
     ctx.arc(j*40-19,i*40-19,15,0,Math.PI*2,true);
     ctx.stroke();
-    if(n%2==choose)
-    {
-        canvasHistory.push(canvas.toDataURL());
-        cindex++;
-    }
+    
     
       audioPlayer("chess","mp3")
       
@@ -167,7 +163,11 @@ function drawchess(i,j)
     }
     ctx.textAlign='center';
       ctx.strokeText(n, j*40-19,i*40-13);
-
+      if(n%2==choose)
+      {
+          canvasHistory.push(canvas.toDataURL());
+          cindex++;
+      }
     // console.log("canvasHistory.length"+canvasHistory.length)
     // ontext.arc(x,y,半径，开始角度，结束角度，是否逆时针旋转)
 }
