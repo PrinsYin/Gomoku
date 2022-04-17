@@ -174,8 +174,9 @@ function minmax(a,b,d,i1,j1)
         if(kill==1)
         {
                     a1=b1=9999999999;
+                    if(d1==0){
                     nx=i;
-            ny=j;
+            ny=j;}
         }
                 else if(kill==0)
                     a1=b1=-9999999999;
