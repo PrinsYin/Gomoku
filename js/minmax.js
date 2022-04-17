@@ -140,6 +140,7 @@ function minmax(a,b,d,i1,j1)
     var list=0;
     digui++;
     var xn=0,yn=0;
+    
     if(d1>=DEPTH)
     {
     //     console.log(getvalue())
@@ -157,9 +158,16 @@ function minmax(a,b,d,i1,j1)
     var cons=gen((d1+1)%2,d1)
     console.log("minmax",cons)
     var i,j;
+    //有没有时候灭有更新nxny
     while(cons.length>0)
     {
         var cons1=cons.shift();
+        if(d1==0&&i1==nx&&j1==ny)
+         {
+            nx=cons1[0];
+            ny=cons1[1];
+            console.log("refresh"+d1,i,j+" "+list[1],a1,nx,ny);
+        }
         i=cons1[0];
         j=cons1[1];
         list=0;
@@ -180,6 +188,7 @@ function minmax(a,b,d,i1,j1)
                     if(d1==1){
                     nx=i;
             ny=j;
+            console.log("refresh"+d1,i,j+" "+list[1],a1,nx,ny);
             return;
         }
         }
@@ -219,7 +228,10 @@ function minmax(a,b,d,i1,j1)
             return 0;
         }
     }
-    
+    if(d==0&&i1==nx&&j1==ny)
+        console.log("error1")
+    if(d==0)
+        console.log("nx ny",nx,ny)
     return [a1,b1];
 }
 

@@ -8,6 +8,7 @@ function undo()
         return;
     }
     n-=2;
+    gamend=0;
     var l=list.pop();
     var i=l[0],j=l[1];
     board[i][j]=0;

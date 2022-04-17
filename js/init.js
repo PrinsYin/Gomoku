@@ -1,4 +1,4 @@
-
+var gamend=0;
 function max(a,b)
 {
     if(a>b)
@@ -31,7 +31,8 @@ function put(i,j)
 {
     
     // console.log(n)
-    
+    if(gamend==1)
+        return;
     
     if(board[i][j]!=0)
         return;
@@ -58,10 +59,12 @@ function put(i,j)
     evaluate(1);
     console.log(kill)
     if(kill==0)
+
         document.getElementById("intro").innerHTML="you won!";
     else if(kill==1)
         document.getElementById("intro").innerHTML="AI won!loser!!!!!!";
-    
+    if(kill!=2)
+        gamend=1;
     if(!allexpand)
         expand(i,j);
         
@@ -72,15 +75,15 @@ function put(i,j)
         digui=0;
         
         minmax(-9999999999,9999999999,0,i,j);
-        console.log(nx,ny,n)
+        // console.log(nx,ny,n)
         put(nx,ny);
-        console.log(nx,ny,n)
+        // console.log(nx,ny,n)
         console.log(COMScore,HUMScore,board1)
         console.log("value:"+evaluate(0))
         ongoing=0;
     }
     
-    console.log("digui",digui,cutnum)
+    // console.log("digui",digui,cutnum)
 }
 
 canvas.addEventListener('click', function(event)
@@ -129,6 +132,7 @@ function audioPlayer(name, type)
 
 function drawchess(i,j)
 {
+    
     console.log("draw",i,j,n)
     ctx.beginPath();
     if(n%2==1)
@@ -246,6 +250,8 @@ function iniboard2(x,y)
 
 function init()
 {
+
+    gamend=0;
     drawboard();
     // var xi=8,yi=8;
     // iniboard2(xi,yi);
