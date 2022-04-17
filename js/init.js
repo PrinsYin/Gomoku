@@ -32,12 +32,13 @@ function put(i,j)
     
     // console.log(n)
     
-    console.log(nx,ny,n)
+    
     if(board[i][j]!=0)
         return;
     list.push([i,j])
     // console.log(i,j)
     n++;
+    console.log(nx,ny,n)
     win=0;
     
     document.getElementById("aaa").innerHTML=n;
@@ -60,8 +61,7 @@ function put(i,j)
         document.getElementById("intro").innerHTML="you won!";
     else if(kill==1)
         document.getElementById("intro").innerHTML="AI won!loser!!!!!!";
-    if(kill!=2)
-        return;
+    
     if(!allexpand)
         expand(i,j);
         
@@ -70,10 +70,11 @@ function put(i,j)
 
         ongoing=1;
         digui=0;
-        // console.log(nx,ny,n)
+        
         minmax(-9999999999,9999999999,0,i,j);
-        // console.log(nx,ny,n)
+        console.log(nx,ny,n)
         put(nx,ny);
+        console.log(nx,ny,n)
         console.log(COMScore,HUMScore,board1)
         console.log("value:"+evaluate(0))
         ongoing=0;

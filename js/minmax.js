@@ -24,40 +24,39 @@ for(var i=x1;i<=x2;i++) {
         var neighbor = [2,2]
         if(n+d1 < 6) neighbor = [1, 1]
         if(hasNeighbor(i, j, neighbor[0], neighbor[1])) { //必须是有邻居的才行
-
-        var scoreHum = p.scoreHum = HUMScore[i][j]
-        var scoreCom = p.scoreCom = COMScore[i][j]
+            
+        var scoreHum = HUMScore[i][j]
+        var scoreCom =  COMScore[i][j]
         var maxScore = Math.max(scoreCom, scoreHum)
-        p.score = maxScore
-        p.role = role
+        let p1=p;
         if(scoreCom >= FIVE) {//先看电脑能不能连成5
-            fives.push(p)
+            console.log(fives.push(p1))
         } else if(scoreHum >= FIVE) {//再看玩家能不能连成5
             //别急着返回，因为遍历还没完成，说不定电脑自己能成五。
-            fives.push(p)
+            fives.push(p1)
         } else if(scoreCom >= FOUR) {
-            comfours.push(p)
+            comfours.push(p1)
         } else if(scoreHum >= FOUR) {
-            humfours.push(p)
+            humfours.push(p1)
         } else if(scoreCom >= BLOCKED_FOUR) {
-            comblockedfours.push(p)
+            comblockedfours.push(p1)
         } else if(scoreHum >= BLOCKED_FOUR) {
-            humblockedfours.push(p)
+            humblockedfours.push(p1)
         } else if(scoreCom >= 2*THREE) {
             //能成双三也行
-            comtwothrees.push(p)
+            comtwothrees.push(p1)
         } else if(scoreHum >= 2*THREE) {
-            humtwothrees.push(p)
+            humtwothrees.push(p1)
         } else if(scoreCom >= THREE) {
-            comthrees.push(p)
+            comthrees.push(p1)
         } else if(scoreHum >= THREE) {
-            humthrees.push(p)
+            humthrees.push(p1)
         } else if(scoreCom >= TWO) {
-            comtwos.shift(p)
+            comtwos.shift(p1)
         } else if(scoreHum >= TWO) {
-            humtwos.shift(p)
+            humtwos.shift(p1)
         } else {
-            neighbors.push(p)
+            neighbors.push(p1)
         }
         }
     }
@@ -65,8 +64,11 @@ for(var i=x1;i<=x2;i++) {
 }
 
 //如果成五，是必杀棋，直接返回
-if(fives.length) return fives
 
+console.log(fives.length>=1)
+if(fives.length>=1) 
+    return fives
+console.log(111)
 // 自己能活四，则直接活四，不考虑冲四
 if (role === COM && comfours.length) return comfours
 if (role === HUM && humfours.length) return humfours
@@ -91,6 +93,7 @@ if (role === COM) {
     .concat(comthrees)
     .concat(humthrees)
 }
+// console.log(result)
 if (role === HUM) {
     result = 
     humtwothrees
@@ -100,7 +103,7 @@ if (role === HUM) {
     .concat(humthrees)
     .concat(comthrees)
 }
-
+// console.log(result)
 // result.sort(function(a, b) { return b.score - a.score })
 
 //双三很特殊，因为能形成双三的不一定比一个活三强
@@ -152,7 +155,7 @@ function minmax(a,b,d,i1,j1)
     // console.log("ab",a,b)
     // console.log("minmax",cons)
     var cons=gen((d1+1)%2,d1)
-    // console.log("minmax",cons)
+    console.log("minmax",cons)
     var i,j;
     while(cons.length>0)
     {
@@ -174,9 +177,11 @@ function minmax(a,b,d,i1,j1)
         if(kill==1)
         {
                     a1=b1=9999999999;
-                    if(d1==0){
+                    if(d1==1){
                     nx=i;
-            ny=j;}
+            ny=j;
+            return;
+        }
         }
                 else if(kill==0)
                     a1=b1=-9999999999;
