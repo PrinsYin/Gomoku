@@ -1,5 +1,12 @@
 function undo()
 {
+    if(ongoing==1)
+        return;
+    if(n<=0)
+    {
+        alert("观棋不语真君子，落子无悔大丈夫！")
+        return;
+    }
     n-=2;
     var l=list.pop();
     var i=l[0],j=l[1];

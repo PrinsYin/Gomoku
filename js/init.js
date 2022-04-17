@@ -133,7 +133,24 @@ function drawchess(i,j)
         canvasHistory.push(canvas.toDataURL());
         cindex++;
     }
-
+    function audioPlayer(name, type) 
+    {
+        var pre = document.getElementById('audio-player-snowt')
+        if (pre) {
+          pre.parentNode.removeChild(pre)
+        }
+        if (!name || !type) return
+        const body = document.body
+        const au = document.createElement('audio')
+        // 这里的路径使用相对路径 传入音频名字和格式就可以 assets下建一个audio存放所有音频
+        au.src = 'media/' + name + '.' + type
+        // au.src = '/' + name + '.' + type
+        au.autoplay = true
+        au.id = 'audio-player-snowt'
+        // au.loop = loop
+        body.appendChild(au)
+      }
+      audioPlayer("chess","mp3")
     // console.log("canvasHistory.length"+canvasHistory.length)
     // ontext.arc(x,y,半径，开始角度，结束角度，是否逆时针旋转)
 }
@@ -212,11 +229,13 @@ function iniboard2(x,y)
 
 function init()
 {
-    var ll="22221122222";
     drawboard();
-    var xi=8,yi=8;
-    iniboard2(xi,yi);
+    // var xi=8,yi=8;
+    // iniboard2(xi,yi);
     initScore();
 }
 
-
+function main()
+{
+    init();
+}
