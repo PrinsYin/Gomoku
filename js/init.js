@@ -109,6 +109,24 @@ canvas.addEventListener('click', function(event)
     put(y,x);
 })
 
+function audioPlayer(name, type) 
+{
+    var pre = document.getElementById('audio-player-snowt')
+    if (pre) {
+        pre.parentNode.removeChild(pre)
+    }
+    if (!name || !type) return
+    const body = document.body
+    const au = document.createElement('audio')
+    // 这里的路径使用相对路径 传入音频名字和格式就可以 assets下建一个audio存放所有音频
+    au.src = 'media/' + name + '.' + type
+    // au.src = '/' + name + '.' + type
+    au.autoplay = true
+    au.id = 'audio-player-snowt'
+    // au.loop = loop
+    body.appendChild(au)
+}
+
 function drawchess(i,j)
 {
     console.log("draw",i,j,n)
@@ -132,24 +150,24 @@ function drawchess(i,j)
         canvasHistory.push(canvas.toDataURL());
         cindex++;
     }
-    function audioPlayer(name, type) 
-    {
-        var pre = document.getElementById('audio-player-snowt')
-        if (pre) {
-          pre.parentNode.removeChild(pre)
-        }
-        if (!name || !type) return
-        const body = document.body
-        const au = document.createElement('audio')
-        // 这里的路径使用相对路径 传入音频名字和格式就可以 assets下建一个audio存放所有音频
-        au.src = 'media/' + name + '.' + type
-        // au.src = '/' + name + '.' + type
-        au.autoplay = true
-        au.id = 'audio-player-snowt'
-        // au.loop = loop
-        body.appendChild(au)
-      }
+    
       audioPlayer("chess","mp3")
+      
+
+      ctx.font = "normal 15px Arial";
+      if(n%2==0)
+    {
+        ctx.fillStyle="black";
+        ctx.strokeStyle="black";
+    }
+    else
+    {
+        ctx.fillStyle="white";
+        ctx.strokeStyle="white";
+    }
+    ctx.textAlign='center';
+      ctx.strokeText(n, j*40-19,i*40-13);
+
     // console.log("canvasHistory.length"+canvasHistory.length)
     // ontext.arc(x,y,半径，开始角度，结束角度，是否逆时针旋转)
 }
