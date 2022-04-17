@@ -115,9 +115,9 @@ function initScore ()
     }
   }
 
-function evaluate(role) 
+function evaluate(role,dd) 
 {
-
+  kill=2;
     var COMMaxScore = 0
     var HUMMaxScore = 0
 
@@ -142,7 +142,16 @@ function evaluate(role)
     //HUMMaxScore = fixScore(HUMMaxScore)
     if(COMMaxScore == HUMMaxScore)
       return [0,0];
-    var result = (role == COM ? 1 : -1) * (COMMaxScore - HUMMaxScore)
+    if(dd&&dd==0)
+      COMMaxScore*=3;
+    else (dd&&dd==1)
+      HUMMaxScore*=3;
+    var result = (COMMaxScore - HUMMaxScore)
+    if(result>5000000)
+      kill=1;
+    if(result<-5000000)
+      kill=0;
+    result = (role == COM ? 1 : -1) * result
     // if (config.cache) evaluateCache[zobrist.code] = result
     // console.log("evaluate",result)
     return [result,result]

@@ -12,10 +12,12 @@ function undo()
     var i=l[0],j=l[1];
     board[i][j]=0;
     board1[i][j]=2;
+    updateScore([i,j]);
     l=list.pop();
     i=l[0],j=l[1];
     board[i][j]=0;
     board1[i][j]=2;
+    updateScore([i,j]);
     document.getElementById("aaa").innerHTML=n;
     ctx.clearRect(0, 0, 605,605);
     let canvasPic = new Image();

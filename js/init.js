@@ -25,8 +25,6 @@ function expand(i,j)
         y1=max(j-2,1);
     if(j+2>y2)
         y2=min(j+2,15);
-    if(x1==1&&y1==1&&x2==15&&y2==15)
-        allexpand=1;
 }
 
 function put(i,j)
@@ -34,7 +32,7 @@ function put(i,j)
     
     // console.log(n)
     
-    // console.log(nx,ny,n)
+    console.log(nx,ny,n)
     if(board[i][j]!=0)
         return;
     list.push([i,j])
@@ -57,14 +55,15 @@ function put(i,j)
     }
     updateScore([i,j]);
     
+    evaluate(1);
     
-    if(win==1)
-        document.getElementById("intro").innerHTML="you won!";
-    else if(win==2)
-        document.getElementById("intro").innerHTML="AI won!loser!!!!!!";
-    if(win!=0)
-        return;
-    if(!allexpand)
+    // if(win==0)
+    //     document.getElementById("intro").innerHTML="you won!";
+    // else if(win==1)
+    //     document.getElementById("intro").innerHTML="AI won!loser!!!!!!";
+    // if(win!=2)
+    //     return;
+    // if(!allexpand)
         expand(i,j);
         
     if(n%2!=choose)
@@ -73,15 +72,15 @@ function put(i,j)
         ongoing=1;
         digui=0;
         // console.log(nx,ny,n)
-        minmax(-9999999,9999999,0,i,j);
+        minmax(-99999999,99999999,0,i,j);
         // console.log(nx,ny,n)
         put(nx,ny);
-        // console.log(COMScore,HUMScore,board1)
-        // console.log("value:"+evaluate(0))
+        console.log(COMScore,HUMScore,board1)
+        console.log("value:"+evaluate(0))
         ongoing=0;
     }
     
-    // console.log(board1,board2,digui,cutnum)
+    console.log("digui",digui,cutnum)
 }
 
 canvas.addEventListener('click', function(event)

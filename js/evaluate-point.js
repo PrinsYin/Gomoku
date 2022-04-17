@@ -73,8 +73,7 @@ var allexpand=0;
 var choose=0;//0:player first
 
 
-var lian5=0,huo4=0,chong4=0,huo3=0,mian3=0,huo2=0,mian2=0;
-var lian51=0,huo41=0,chong41=0,huo31=0,mian31=0,huo21=0,mian21=0;
+var kill=2;
 var digui=0,cutnum=0;
 var canvasHistory = [];
 var cindex=0;
@@ -191,7 +190,7 @@ var scorePoint = function(px, py, role, dir)
       // console.log(px,i)
       var t = board1[px][i]
       if(t === EMPTY) {
-        if(empnum == -1 && i<15-1 && board1[px][i+1] == role) {
+        if(empnum == -1 && i<16-1 && board1[px][i+1] == role) {
           empnum = count
           continue
         } else {
@@ -215,7 +214,7 @@ var scorePoint = function(px, py, role, dir)
       }
       var t = board1[px][i]
       if(t === EMPTY) {
-        if(empnum == -1 && i>0 && board1[px][i-1] == role) {
+        if(empnum == -1 && i>1 && board1[px][i-1] == role) {
           empnum = 0  //注意这里是0，因为是从右往左走的
           continue
         } else {
@@ -234,7 +233,7 @@ var scorePoint = function(px, py, role, dir)
 
     count+= secondCount
 
-    scoreCache[role][0][px][py]= countToScore(count, block, EMPTY)
+    scoreCache[role][0][px][py]= countToScore(count, block, empnum)
   }
   result += scoreCache[role][0][px][py];
 
@@ -250,7 +249,7 @@ var scorePoint = function(px, py, role, dir)
       }
       var t = board1[i][py]
       if(t === EMPTY) {
-        if(empnum== -1 && i<15-1 && board1[i+1][py] == role) {
+        if(empnum== -1 && i<16-1 && board1[i+1][py] == role) {
           empnum = count
           continue
         } else {
@@ -273,7 +272,7 @@ var scorePoint = function(px, py, role, dir)
       }
       var t = board1[i][py]
       if(t === EMPTY) {
-        if(empnum == -1 && i>0 && board1[i-1][py] == role) {
+        if(empnum == -1 && i>1 && board1[i-1][py] == role) {
           empnum = 0
           continue
         } else {
@@ -309,7 +308,7 @@ var scorePoint = function(px, py, role, dir)
       }
       var t = board1[x][y]
       if(t === EMPTY) {
-        if(empnum== -1 && (x<15-1 && y < 15-1) && board1[x+1][y+1] == role) {
+        if(empnum== -1 && (x<16-1 && y < 16-1) && board1[x+1][y+1] == role) {
           empnum = count
           continue
         } else {
@@ -333,7 +332,7 @@ var scorePoint = function(px, py, role, dir)
       }
       var t = board1[x][y]
       if(t === EMPTY) {
-        if(empnum == -1 && (x>0 && y>0) && board1[x-1][y-1] == role) {
+        if(empnum == -1 && (x>1 && y>1) && board1[x-1][y-1] == role) {
           empnum = 0
           continue
         } else {
@@ -369,7 +368,7 @@ var scorePoint = function(px, py, role, dir)
       }
       var t = board1[x][y]
       if(t === EMPTY) {
-        if(empnum== -1 && (x<15-1 && y>0) && board1[x+1][y-1] == role) {
+        if(empnum== -1 && (x<16-1 && y>1) && board1[x+1][y-1] == role) {
           empnum= count
           continue
         } else {
@@ -393,7 +392,7 @@ var scorePoint = function(px, py, role, dir)
       }
       var t = board1[x][y]
       if(t === EMPTY) {
-        if(empnum == -1 && (x>0 && y<15-1) && board1[x-1][y+1] == role) {
+        if(empnum == -1 && (x>01&& y<16-1) && board1[x-1][y+1] == role) {
           empnum = 0
           continue
         } else {
