@@ -1,4 +1,4 @@
-const DEPTH=6;
+const DEPTH=8;
 function gen(role,d1)
 {
 if (n==1) return [[7, 7]]

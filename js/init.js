@@ -72,7 +72,7 @@ function put(i,j)
         ongoing=1;
         digui=0;
         // console.log(nx,ny,n)
-        minmax(-99999999,99999999,0,i,j);
+        minmax(-999999999,999999999,0,i,j);
         // console.log(nx,ny,n)
         put(nx,ny);
         console.log(COMScore,HUMScore,board1)
