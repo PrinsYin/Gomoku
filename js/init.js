@@ -54,16 +54,15 @@ function put(i,j)
     // console.log(lian51,huo41,chong41,huo31,mian31,huo21,mian21)
     }
     updateScore([i,j]);
-    
     evaluate(1);
-    
-    // if(win==0)
-    //     document.getElementById("intro").innerHTML="you won!";
-    // else if(win==1)
-    //     document.getElementById("intro").innerHTML="AI won!loser!!!!!!";
-    // if(win!=2)
-    //     return;
-    // if(!allexpand)
+    console.log(kill)
+    if(kill==0)
+        document.getElementById("intro").innerHTML="you won!";
+    else if(kill==1)
+        document.getElementById("intro").innerHTML="AI won!loser!!!!!!";
+    if(kill!=2)
+        return;
+    if(!allexpand)
         expand(i,j);
         
     if(n%2!=choose)
