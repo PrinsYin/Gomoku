@@ -45,7 +45,7 @@
     font-size:40px;
     position:absolute;
     left:50%;
-    /* width:300px; */
+    width:580px; 
     font-family: font1; 
     transform:translateX(-50%);
 }
@@ -61,6 +61,18 @@
     width:90px;
     font-family: font1; 
     transform:translateX(-50%);
+}
+
+.mutea
+{
+    float:left;
+    text-align: center;
+    font-size:27px;
+    position:absolute;
+    left:30%;
+    top:15px;
+    height:30px;
+    font-family: font1; 
 }
 
 

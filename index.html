@@ -11,20 +11,22 @@
 <body onload="main()">
     <!-- <embed height="0" width="0" src="media/chess.mp3"> -->
     <div class="container">
+        <img src="media/mute.png" class="mutea" onclick="mutea()" id="mutep">
         <div class="intro" id="intro">
+           
            五子棋ai
            <br><font style="font-size:30px;">尹卓然</font>
         </div>
         <div id="aaa" class="btnn">
             <!-- <div style="float:left;text-align:center; top:100px;">You</div> -->
             <button class="btn btn-info btn1" onclick="undo()">悔棋</button>
-            <button class="btn btn-info btn2" onclick="main()">重来</button>
+            <button class="btn btn-warning btn2" onclick="main()">重来</button>
             <!-- <div style="text-align: right; top:100px;">AI</div> -->
             <br>
         </div>
         <div id="aaa" class="info">
             <div style="float:left;text-align:center; top:0px;position:absolute;">You</div>
-            <div style="text-align: right; top:0px;position:absolute; right:20px;">AI</div>
+            <div style="text-align: right; top:0px;position:absolute; right:20px;" id="ai">AI</div>
             <br>
             <img src="media/black.png" class="img1">
         <img src="media/white.png" class="img2">
@@ -35,6 +37,7 @@
         
         <canvas width="605px" height="605px" id="canvas" class="board">           </canvas>
     </div>
+    <script src="js/config.js"></script> 
     <script src="js/evaluate-point.js"></script>    
     <script src="js/evaluate.js"></script> 
     <script src="js/init.js"></script>     

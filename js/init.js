@@ -15,8 +15,17 @@ function min(a,b)
         return b;
 }
 
+function mutea()
+{
+    document.getElementById("mutep").src=(mute==1)?"media/mute.png":"media/nmute.png";
+    mute=(mute==1)?0:1;
+    
+}
+
 function audioPlayer(name, type) 
 {
+    if(mute==1)
+        return;
     var pre = document.getElementById('audio-player-snowt')
     if (pre) {
         pre.parentNode.removeChild(pre)
@@ -65,6 +74,7 @@ function put(i,j)
     win=0;
     
     // document.getElementById("aaa").innerHTML=n;
+    if(n%2==choose)
     drawchess(i,j);
     board[i][j]=n;
     // console.log(i,j)
@@ -100,10 +110,21 @@ function put(i,j)
 
         ongoing=1;
         digui=0;
-        
-        minmax(-9999999999,9999999999,0,nx,ny);
+        drawchess(i,j);
+        audioPlayer("chess","mp3")
+        // document.getElementById("ai").innerHTML="thinking.......AI"
+        setTimeout(function () {
+            if (drawdone) {
+                
+                minmax(-9999999999,9999999999,0,nx,ny);
+                put(nx,ny);
+                
+                
+        }}, 1);
+        // document.getElementById("ai").innerHTML="AI"
+        audioPlayer("chess","mp3")
         // console.log(nx,ny,n)
-        put(nx,ny);
+        
         // console.log(nx,ny,n)
         console.log(COMScore,HUMScore,board1)
         console.log("value:"+evaluate(0))
@@ -143,10 +164,56 @@ canvas.addEventListener('click', function(event)
 
 function drawchess(i,j)
 {
-    
+    drawdone=0;
     console.log("draw",i,j,n)
     ctx.beginPath();
     if(n%2==1)
+    {
+        ctx.fillStyle="black";
+        ctx.strokeStyle="black";
+    }
+    else
+    {
+        // ctx.fillStyle="lightgrey";
+        ctx.fillStyle="white";
+        ctx.strokeStyle="black";
+    }
+    ctx.arc(j*40-19,i*40-19,15,0,Math.PI*2,true);
+    ctx.fill();
+    ctx.arc(j*40-19,i*40-19,15,0,Math.PI*2,true);
+    ctx.stroke();
+    if(n%2==1)
+    {
+        ctx.strokeStyle="white";
+    }
+    else
+    {
+        ctx.strokeStyle="black";
+    }
+    ctx.arc(j*40-19,i*40-19,12,0,Math.PI*2,true);
+    ctx.stroke();
+    
+    ctx.font = "normal 15px Arial";
+      if(n%2==0)
+    {
+        ctx.fillStyle="black";
+        ctx.strokeStyle="black";
+    }
+    else
+    {
+        ctx.fillStyle="white";
+        ctx.strokeStyle="white";
+    }
+    ctx.textAlign='center';
+      ctx.strokeText(n, j*40-19,i*40-13);
+
+    if(list.length>1)
+    {
+    i=list[list.length-2][0];
+    j=list[list.length-2][1];
+
+    ctx.beginPath();
+    if(n%2==0)
     {
         ctx.fillStyle="black";
         ctx.strokeStyle="black";
@@ -161,12 +228,8 @@ function drawchess(i,j)
     ctx.arc(j*40-19,i*40-19,15,0,Math.PI*2,true);
     ctx.stroke();
     
-    
-      audioPlayer("chess","mp3")
-      
-
-      ctx.font = "normal 15px Arial";
-      if(n%2==0)
+    ctx.font = "normal 15px Arial";
+      if(n%2==1)
     {
         ctx.fillStyle="black";
         ctx.strokeStyle="black";
@@ -177,12 +240,19 @@ function drawchess(i,j)
         ctx.strokeStyle="white";
     }
     ctx.textAlign='center';
-      ctx.strokeText(n, j*40-19,i*40-13);
+      ctx.strokeText(n-1, j*40-19,i*40-13);
+    }
+    
+      
+
+      
       if(n%2==choose)
       {
           canvasHistory.push(canvas.toDataURL());
           cindex++;
       }
+      drawdone=1;
+      
     // console.log("canvasHistory.length"+canvasHistory.length)
     // ontext.arc(x,y,半径，开始角度，结束角度，是否逆时针旋转)
 }
@@ -265,6 +335,7 @@ function init()
 {
     xini=0,yini=0;
      list=[];
+     mute=0;
  board=[
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -347,6 +418,7 @@ function init()
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
     gamend=0;
+    drawboard();
     drawboard();
     // var xi=8,yi=8;
     // iniboard2(xi,yi);

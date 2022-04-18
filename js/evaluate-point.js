@@ -65,6 +65,7 @@ var board2=[
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 var win=0;
+var mute=0;
 var canvas= document.getElementById('canvas')
 var ctx=document.getElementById("canvas").getContext("2d");
 var n=0;
@@ -73,7 +74,7 @@ var nx,ny;
 var ongoing=0;
 var allexpand=0;
 var choose=0;//0:player first
-
+var drawdone=0;
 
 var kill=2;
 var digui=0,cutnum=0;

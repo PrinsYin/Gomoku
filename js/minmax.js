@@ -1,4 +1,3 @@
-const DEPTH=1;
 function gen(role,d1)
 {
 if (n==1) 
@@ -74,7 +73,7 @@ for(var i=x1;i<=x2;i++) {
 // console.log(fives.length>=1)
 if(fives.length>=1) 
     return fives
-console.log(111)
+// console.log(111)
 // 自己能活四，则直接活四，不考虑冲四
 if (role === COM && comfours.length) return comfours
 if (role === HUM && humfours.length) return humfours
@@ -154,7 +153,7 @@ function minmax(a,b,d,i1,j1)
     // // if(ongoing!=1)
     // console.log(lian51,huo41,chong41,huo31,mian31,huo21,mian21)
     // console.log(evaluate(1))
-        return evaluate(1,d1%2);//d为偶数，AI下棋
+        return evaluate(1,d1%2);//d为偶数，AI下棋，返回先手
     }
     var a1=a,b1=b;
     // if(d%2==1)
