@@ -19,7 +19,8 @@ function undo()
     board[i][j]=0;
     board1[i][j]=2;
     updateScore([i,j]);
-    document.getElementById("aaa").innerHTML=n;
+    document.getElementById("intro").innerHTML="五子棋ai <br><font style='font-size:30px;'>尹卓然</font>";
+    // document.getElementById("aaa").innerHTML=n;
     ctx.clearRect(0, 0, 605,605);
     let canvasPic = new Image();
     cindex--;

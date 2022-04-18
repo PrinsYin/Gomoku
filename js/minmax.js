@@ -1,7 +1,13 @@
-const DEPTH=8;
+const DEPTH=1;
 function gen(role,d1)
 {
-if (n==1) return [[7, 7]]
+if (n==1) 
+{
+    if(xini==1&&yini==1)
+        return[[8,8]];
+    else
+        return [[max(1,xini-1), max(1,yini-1)]]
+}
 var fives = []
 var comfours=[]
 var humfours=[]
@@ -65,7 +71,7 @@ for(var i=x1;i<=x2;i++) {
 
 //如果成五，是必杀棋，直接返回
 
-console.log(fives.length>=1)
+// console.log(fives.length>=1)
 if(fives.length>=1) 
     return fives
 console.log(111)
@@ -156,18 +162,18 @@ function minmax(a,b,d,i1,j1)
     // console.log("ab",a,b)
     // console.log("minmax",cons)
     var cons=gen((d1+1)%2,d1)
-    console.log("minmax",cons)
+    // console.log("minmax",cons)
     var i,j;
     //有没有时候灭有更新nxny
     while(cons.length>0)
     {
         var cons1=cons.shift();
-        if(d1==0&&i1==nx&&j1==ny)
-         {
-            nx=cons1[0];
-            ny=cons1[1];
-            console.log("refresh"+d1,i,j+" "+list[1],a1,nx,ny);
-        }
+        // if(d1==0&&i1==nx&&j1==ny)
+        //  {
+        //     nx=cons1[0];
+        //     ny=cons1[1];
+        //     console.log("refresh"+d1,i,j+" "+list[1],a1,nx,ny);
+        // }
         i=cons1[0];
         j=cons1[1];
         list=0;
@@ -184,7 +190,7 @@ function minmax(a,b,d,i1,j1)
         evaluate(1);
         if(kill==1)
         {
-                    a1=b1=9999999999;
+                    a1=b1=9999999995;
                     if(d1==1){
                     nx=i;
             ny=j;
@@ -193,7 +199,7 @@ function minmax(a,b,d,i1,j1)
         }
         }
                 else if(kill==0)
-                    a1=b1=-9999999999;
+                    a1=b1=-9999999995;
                 else
         list=minmax(a1,b1,d1,i,j);
         
@@ -231,7 +237,7 @@ function minmax(a,b,d,i1,j1)
     if(d==0&&i1==nx&&j1==ny)
         console.log("error1")
     if(d==0)
-        console.log("nx ny",nx,ny)
+        console.log("nx ny",nx,ny,i1,j1)
     return [a1,b1];
 }
 

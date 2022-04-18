@@ -15,6 +15,24 @@ function min(a,b)
         return b;
 }
 
+function audioPlayer(name, type) 
+{
+    var pre = document.getElementById('audio-player-snowt')
+    if (pre) {
+        pre.parentNode.removeChild(pre)
+    }
+    if (!name || !type) return
+    const body = document.body
+    const au = document.createElement('audio')
+    // 这里的路径使用相对路径 传入音频名字和格式就可以 assets下建一个audio存放所有音频
+    au.src = 'media/' + name + '.' + type
+    // au.src = '/' + name + '.' + type
+    au.autoplay = true
+    au.id = 'audio-player-snowt'
+    // au.loop = loop
+    body.appendChild(au)
+}
+
 function expand(i,j)
 {
     if(i-2<x1)
@@ -29,7 +47,11 @@ function expand(i,j)
 
 function put(i,j)
 {
-    
+    if(xini==0&&yini==0)
+    {
+        xini=i;
+        yini=j;
+    }
     // console.log(n)
     if(gamend==1)
         return;
@@ -42,7 +64,7 @@ function put(i,j)
     console.log(nx,ny,n)
     win=0;
     
-    document.getElementById("aaa").innerHTML=n;
+    // document.getElementById("aaa").innerHTML=n;
     drawchess(i,j);
     board[i][j]=n;
     // console.log(i,j)
@@ -59,10 +81,15 @@ function put(i,j)
     evaluate(1);
     console.log(kill)
     if(kill==0)
-
+    {
+        audioPlayer("victory","mp3")
         document.getElementById("intro").innerHTML="you won!";
+    }
     else if(kill==1)
+    {
+        audioPlayer("loss","mp3")
         document.getElementById("intro").innerHTML="AI won!loser!!!!!!";
+    }
     if(kill!=2)
         gamend=1;
     if(!allexpand)
@@ -74,7 +101,7 @@ function put(i,j)
         ongoing=1;
         digui=0;
         
-        minmax(-9999999999,9999999999,0,i,j);
+        minmax(-9999999999,9999999999,0,nx,ny);
         // console.log(nx,ny,n)
         put(nx,ny);
         // console.log(nx,ny,n)
@@ -112,23 +139,7 @@ canvas.addEventListener('click', function(event)
     put(y,x);
 })
 
-function audioPlayer(name, type) 
-{
-    var pre = document.getElementById('audio-player-snowt')
-    if (pre) {
-        pre.parentNode.removeChild(pre)
-    }
-    if (!name || !type) return
-    const body = document.body
-    const au = document.createElement('audio')
-    // 这里的路径使用相对路径 传入音频名字和格式就可以 assets下建一个audio存放所有音频
-    au.src = 'media/' + name + '.' + type
-    // au.src = '/' + name + '.' + type
-    au.autoplay = true
-    au.id = 'audio-player-snowt'
-    // au.loop = loop
-    body.appendChild(au)
-}
+
 
 function drawchess(i,j)
 {
@@ -179,6 +190,7 @@ function drawchess(i,j)
 
 function drawboard()
 {
+    ctx.clearRect(0, 0, 605,605);
     ctx.fill();
     ctx.shadowBlur=10;
     ctx.shadowOffsetX=5;
@@ -189,16 +201,17 @@ function drawboard()
     ctx.shadowBlur=0;
     ctx.shadowOffsetX=0;
     ctx.shadowOffsetY=0;
+    ctx.beginPath();
     for(var i = 0; i < 15; i++)
     {
         // ctx.strokeStyle="red";
         ctx.moveTo(21+i * 40 , 21);
         ctx.lineTo(21+i * 40 , 581);
-        //垂直方向画15根，相距30px
+        // //垂直方向画15根，相距30px
         ctx.stroke();
         ctx.moveTo(21 , 21+i * 40);
         ctx.lineTo(581, 21+ i * 40); 
-        //水平方向画15根，相距30px
+        // //水平方向画15根，相距30px
         ctx.stroke();
     }
 
@@ -250,7 +263,89 @@ function iniboard2(x,y)
 
 function init()
 {
+    xini=0,yini=0;
+     list=[];
+ board=[
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+ board1=[
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+    [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]];
+ win=0;
+ n=0;
+ x1=6,y1=6,x2=10,y2=10;
+ nx,ny;
+ ongoing=0;
+ allexpand=0;
+ choose=0;//0:player first
+ document.getElementById("intro").innerHTML="五子棋ai <br><font style='font-size:30px;'>尹卓然</font>";
 
+ kill=2;
+ digui=0,cutnum=0;
+ canvasHistory = [];
+ cindex=0;
+ HUMScore=[
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+ COMScore=[
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
     gamend=0;
     drawboard();
     // var xi=8,yi=8;
@@ -260,5 +355,7 @@ function init()
 
 function main()
 {
+    ctx.clearRect(0, 0, 605,605);
     init();
 }
+

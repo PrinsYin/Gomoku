@@ -12,12 +12,24 @@
     <!-- <embed height="0" width="0" src="media/chess.mp3"> -->
     <div class="container">
         <div class="intro" id="intro">
-           尹卓然 prinsyin@foxmail.com
+           五子棋ai
+           <br><font style="font-size:30px;">尹卓然</font>
+        </div>
+        <div id="aaa" class="btnn">
+            <!-- <div style="float:left;text-align:center; top:100px;">You</div> -->
+            <button class="btn btn-info btn1" onclick="undo()">悔棋</button>
+            <button class="btn btn-info btn2" onclick="main()">重来</button>
+            <!-- <div style="text-align: right; top:100px;">AI</div> -->
+            <br>
         </div>
         <div id="aaa" class="info">
-            
+            <div style="float:left;text-align:center; top:0px;position:absolute;">You</div>
+            <div style="text-align: right; top:0px;position:absolute; right:20px;">AI</div>
+            <br>
+            <img src="media/black.png" class="img1">
+        <img src="media/white.png" class="img2">
         </div>
-        <button class="btn btn-info btn1" onclick="undo()">悔棋</button>
+        
         <!-- <button class="btn btn-info" onclick="playerf()">玩家先行</button>
         <button class="btn btn-info" onclick="aif()">电脑先行</button> -->
         
