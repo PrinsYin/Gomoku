@@ -35,7 +35,8 @@ for(var i=x1;i<=x2;i++) {
         var maxScore = Math.max(scoreCom, scoreHum)
         let p1=p;
         if(scoreCom >= FIVE) {//先看电脑能不能连成5
-            console.log(fives.push(p1))
+            // console.log(fives.push(p1))
+            fives.push(p1)
         } else if(scoreHum >= FIVE) {//再看玩家能不能连成5
             //别急着返回，因为遍历还没完成，说不定电脑自己能成五。
             fives.push(p1)
@@ -148,7 +149,7 @@ function minmax(a,b,d,i1,j1)
     
     if(d1>=DEPTH)
     {
-    //     console.log(getvalue())
+        // console.log(DEPTH)
     //     console.log(lian5,huo4,chong4,huo3,mian3,huo2,mian2);
     // // if(ongoing!=1)
     // console.log(lian51,huo41,chong41,huo31,mian31,huo21,mian21)
@@ -176,38 +177,55 @@ function minmax(a,b,d,i1,j1)
         i=cons1[0];
         j=cons1[1];
         list=0;
-        // console.log("minmax",cons)
-        //initial n:1 d:0
-        // n++;
         d1++;
-        // board1[i][j]=n;
         if(d1%2==1)
             board1[i][j]=1;
         else
             board1[i][j]=0;
         updateScore([i,j]);
-        evaluate(1);
-        if(kill==1)
+        // console.log(i+"aaa"+j)
+        evaluate(1,5);
+        if(kill==1&&d1%2==1)
         {
-                    a1=b1=9999999995;
-                    if(d1==1){
-                    nx=i;
+            console.log("kill"+d1,i,j);
+            a1=9999999997-d1;
+            b1=9999999997-d1;
+            if(d1==1){
+                 nx=i;
             ny=j;
             console.log("refresh"+d1,i,j+" "+list[1],a1,nx,ny);
             return;
+            }
+            else
+            {
+                board1[i][j]=2;
+                d1--;
+                updateScore([i,j]);
+                return [a1,b1]
+            }
         }
+        else if(kill==0&&d1%2==0)
+        {
+            console.log("kill"+d1,i,j);
+            a1=-9999999995+d1;
+            b1=-9999999995+d1;
+            board1[i][j]=2;
+            d1--;
+            updateScore([i,j]);
+            return [a1,b1]
         }
-                else if(kill==0)
-                    a1=b1=-9999999995;
-                else
-        list=minmax(a1,b1,d1,i,j);
+        else if(kill==1&&d1%2==0)
+        {
+            ;
+        }
+        else if(kill==0&&d1%2==1)
+        {
+            ;
+        }
+        else if(kill==2)
+            list=minmax(a1,b1,d1,i,j);
         
-        // console.log("list",list,a1,b1,xn,yn,nx,ny)
-        // console.log(list)
-        // board1[i][j]=0;
         board1[i][j]=2;
-        // board2[i][j]=0;
-        // n--;
         d1--;
         updateScore([i,j]);
         if(!list)

@@ -142,10 +142,10 @@ function evaluate(role,dd)
     //HUMMaxScore = fixScore(HUMMaxScore)
     if(COMMaxScore == HUMMaxScore)
       return [0,0];
-    if(dd&&dd==0)
+    if(dd==0)
       COMMaxScore*=3;
-    else (dd&&dd==1)
-      HUMMaxScore*=3;
+    else if(dd==1)
+      HUMMaxScore*=2;
     var result = (COMMaxScore - HUMMaxScore)
     if(result>5000000)
       kill=1;

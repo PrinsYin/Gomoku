@@ -88,12 +88,12 @@ function put(i,j)
     // console.log(lian51,huo41,chong41,huo31,mian31,huo21,mian21)
     }
     updateScore([i,j]);
-    evaluate(1);
-    console.log(kill)
+    var valueresult=evaluate(1,5);
+    document.getElementById("value").innerHTML="value:"+valueresult[0];
     if(kill==0)
     {
         audioPlayer("victory","mp3")
-        document.getElementById("intro").innerHTML="you won!";
+        document.getElementById("intro").innerHTML="you won!good!";
     }
     else if(kill==1)
     {
@@ -127,7 +127,7 @@ function put(i,j)
         
         // console.log(nx,ny,n)
         console.log(COMScore,HUMScore,board1)
-        console.log("value:"+evaluate(0))
+        // console.log("value:"+evaluate(0,5))
         ongoing=0;
     }
     
